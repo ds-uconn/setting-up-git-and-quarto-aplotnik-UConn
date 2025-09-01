@@ -189,8 +189,18 @@ plt.show()
 
 There are ways to do this through VS Code but we will render our homework through the terminal.
 
+1. We must make sure our virtual environment is still active.
 
+2. Navigate through the terminal to the directory where the .qmd homework assignment is located.
 
-
+3. In the terminal use `quarto render your_file.qmd` to create HTML version.
 
 ## Print the HTML file to a pdf file and put the file into a release in your GitHub repo.
+
+For this step, I initially opened the HTML in a browser and printed the PDF.  However, I did find steps to do this through the terminal:
+
+1. Install wkhtmltopdf using Homebrew: `brew install wkhtmltopdf`.
+
+2. In the directory where the HTML is located run `wkhtmltopdf input_file.html output_file.pdf`.
+
+After saving the PDF, click on **Create a new release** in the GitHub repository.  Add any titles or notes, and attach the PDF.  Click **Publish release**.
