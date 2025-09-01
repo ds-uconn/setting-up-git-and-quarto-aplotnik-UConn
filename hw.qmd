@@ -75,15 +75,9 @@ The first step is to generate an SSH key on your computer.
 
     This message is a security warning that your computer has never connected to GitHub and needs to verify its identity.  Some sources online say you can just type yes, but I think it would be good to verify this is the correct connection.  You can visit [GitHub's SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints) to see their different public keys.  From this website, you can copy their Ed25519 key and paste it into your terminal.  If it is a match, then everything should be good.  You may be asked to enter your passphrase if you are not running an SSH Agent.
 
-
-
-
-
 ## Install Quarto onto your computer following the instructions of Get Started
 
-
-
-
+This step is fairly straightforward and follows a similar installation process to other programs.  The code in the following steps uses VSCode now we are setting up our computers to be able to use .qmd files in VSCode.  First, we must install Quarto on our computers, it can be found in this link: [Get Started](https://quarto.org/docs/get-started/).  You can choose your operating system follow the installation steps.
 
 ## Pick a tool of your choice (e.g., VS Code, Jupyter Notebook, Positron, Emacs, etc.), follow the instructions to reproduce the example of line plot on polar axis.
 
@@ -94,23 +88,3 @@ The first step is to generate an SSH key on your computer.
 
 
 ## Print the HTML file to a pdf file and put the file into a release in your GitHub repo.
-
-# Problme 2
-
-Here is your text desctiption.
-
-You can add some code chunks.
-
-Explain your code.  Here is a list:
-
-1. first
-1. second
-1. third
-
-# Making a release for grading
-
-To keep your repo clean, you don't want to track the generated
-pdf or html output. To facilitate grading, however, please 
-create a release and upload your pdf output so that my grader
-doesn't need to run your code to generate the same output on
-his/her computer.
