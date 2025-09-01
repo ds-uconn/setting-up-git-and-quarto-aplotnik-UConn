@@ -125,10 +125,71 @@ The code in the Quarto tutorial uses Python as well as specific packages.  It is
 
 Now that we have set up our virtual environment and packages, we can go through the tutorial.
 
+1. Copy and paste the code in the tutorial into a new hello.qmd file.  It should generate the code and image below.
 
+For a demonstration of a line plot on a polar axis, see @fig-polar.
 
+```{python}
+#| label: fig-polar
+#| fig-cap: "A line plot on a polar axis"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection': 'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+2. Next it asks to install dependencies but we should be all set in our virtual environment.
+
+3. Goes over how rendering works with a .qmd file:
+
+    > When you render a .qmd file with Quarto, the executable code blocks are processed by Jupyter, and the resulting
+    > combination of code, markdown, and output is converted to plain markdown. Then, this markdown is processed by Pandoc,
+    > which creates the finished format.
+
+4. Ask you to make the following small change to your code `theta = 4 * np.pi * r`.  This should results in the image below:
+
+For a demonstration of a line plot on a polar axis, see @fig-polar-updated.
+
+```{python}
+#| label: fig-polar-updated
+#| fig-cap: "A line plot on a polar axis"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 4 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection': 'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+5. Tutorial also shows that you do not need to generate the entire document, you can just click **Run Cell** in the .qmd file.
+
+6. YAML options allow you to either hide your code as shown above or display it.  This homework assignment has code-fold as True so my code snippets will be hidden.
+
+7. We can create headings using two ## signs.
+
+8. Finally goes over details of the code cell options as well as options to preview the document externally.
 
 ## Render the homework into a HTML.
+
+There are ways to do this through VS Code but we will render our homework through the terminal.
+
+
 
 
 
