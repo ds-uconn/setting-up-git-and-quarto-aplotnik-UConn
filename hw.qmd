@@ -39,15 +39,41 @@ The first step is to generate an SSH key on your computer.
       + `-t ed25519`: this specifies the type of key (ed25519).
       + `-C "email@example.com"`: adds a comment to your key to help with identification in the future.
     + After this command, there will be few prompts:
-      + "Enter file in which to save the key": you can press Enter to save it in the default file location ~/.ssh/id_ed25519. The .ssh folder is a hidden folder where all of your SSH keys will be stored.  You can toggle hidden files and folders by pressing Command + Shift + Period in Finder.  The "id_ed25519" is the default key name.  If you generate a new key without specifying a name, you will be prompted whether or not you would like to overwrite the key.  There are instructions below on naming keys.
-      + Enter and re-enter passphrase: adds a layer of security and encrypts the key on your hardrive.
+      + "Enter file in which to save the key": you can press Enter to save it in the default file location ~/.ssh/id_ed25519. The .ssh folder is a hidden folder where all of your SSH keys will be stored.  You can toggle hidden files and folders by pressing Command + Shift + Period in Finder.  The "id_ed25519" is the default key name.  If at a later time, you generate another key without specifying a name, you will be prompted whether or not you would like to overwrite the key.  There are instructions below on naming keys.
+      + Enter and re-enter passphrase: adds a layer of security and encrypts the key on your hard drive.
     + Now you will see two keys in your .ssh folder: id_ed25519 (private key) and id_ed25519.pub (public key).  DO NOT SHARE PRIVATE KEY WITH ANYONE.  When using any service, always provide the .pub key.
 
     Due to potentailly overwriting keys, perhaps needing multiple keys, or just wanting to know how to name keys, I tried to name my key and the steps were slightly different.
 
     To generate a named key, it is similar steps except for the initial command you enter into the terminal:
-    + `test`:
-3. Test
+    + `ssh-keygen -t ed25519 -f ~/.ssh/my_key_name -C "email@example.com"`:
+      + `-f ~/.ssh/my_key_name`: this is the only difference from the command above.  It specifies the key name.  Enter your own key name in place of "my_key_name".
+3. Now we can add our key to an SSH Agent.  This step is optional and does not impact your ability to interact with a remote repository.  The SSH Agent just holds your keys in memory so you do not have to enter in your passphrase for every connection to a remote repository.  I did not use an SSH Agent.  To add keys to SSH Agent, you have to input the following two commands into your terminal:
+    + `eval "$(ssh-agent -s)"`: this command starts the agent.  You can check if agent is already running with `ssh-add -l`.  If it is not running you will receive the message "Could not open a connection to your authentication agent."
+    + `ssh-add ~/.ssh/id_ed25519`: this will add your key to agent, where "id_ed25519" is the default key name.  If you named your key, you would have to input `ssh-add ~/.ssh/my_key_name`.
+
+### Set up GitHub account
+
+1. We will momentarily step away and set up our [GitHub](https://github.com/) account.  Click Sign Up on the website, this process is similar to any other account and I do not believe warrants any steps.
+
+### Add SSH key to GitHub Account
+
+1. Now that we have set up our GitHub account, we can proceed to add our previously generated key to our account.  We should begin by clicking our profile picture in our GitHub account and clicking **Settings** and afterwards going into **SSH and GPG Keys**.  You will see a **New SSH key** button and we can click it now to bring us to the screen where we add our key.
+2. We will quickly hop over to our terminal and enter `cat ~/.ssh/id_ed25519.pub`.  This copies our key to the clipboard.  It should be noted that the public key is being copied, not the private key.  Also, if you named your key you will have to change "id_ed25519.pub" to your key name.
+3. Now we can go over to the GitHub page to input our key.  You can give the key a name in the Title field and pasted your public key into the Key field.  Now your key should be added to your GitHub Account
+
+### Verifying your SSH connection to GitHub
+
+1. This is the final step in setting up SSH authentication between your computer and GitHub account.  There are two steps below, one for a generated key and the other if you named your key:
+    + `ssh -T git@github.com`: this will test the connection between your unnamed key.
+    + `ssh -i ~/.ssh/my_key_name -T git@github.com`: this is for your named key, replace "my_key_name" with your key.  It should be noted that the key you are using here is your private key, and do not include .pub.
+2. In examples I have seen, this usually verifies the connection and everything is good to go.  However, I received the following message:
+
+    >The authenticity of host 'github.com (140.82.112.4)' can't be established.
+    >ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zP...
+    >Are you sure you want to continue connecting (yes/no/[fingerprint])?
+
+    This message is a security warning that your computer has never connected to GitHub and needs to verify its identity.  Some sources online say you can just type yes, but I think it would be good to verify this is the correct connection.  You can visit [GitHub's SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints) to see their different public keys.  From this website, you can copy their Ed25519 key and paste it into your terminal.  If it is a match, then everything should be good.  You may be asked to enter your passphrase if you are not running an SSH Agent.
 
 
 
