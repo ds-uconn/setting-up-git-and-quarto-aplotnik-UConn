@@ -64,7 +64,7 @@ To add keys to SSH Agent, you have to input the following two commands into your
 
 ### Set up GitHub account
 
-1. We will momentarily step away and set up our [GitHub](https://github.com/) account.
+We will momentarily step away and set up our [GitHub](https://github.com/) account.
 Click Sign Up on the website, this process is similar to any other account and I do not believe warrants any steps.
 
 ### Add SSH key to GitHub Account
@@ -102,6 +102,29 @@ First, we must install Quarto on our computers, it can be found in this link: [G
 You can choose your operating system follow the installation steps.
 
 ## Pick a tool of your choice (e.g., VS Code, Jupyter Notebook, Positron, Emacs, etc.), follow the instructions to reproduce the example of line plot on polar axis.
+
+After the installation, we can pick an IDE of our choice.
+The code below uses VS Code.  There are a couple of steps before we can follow along with the instructions on then [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/vscode.html) website.
+
+### Install VS Code Quarto extension
+
+This is another straightforward step where we can navigate to the **Extensions** tab in VS Code and search for Quarto.  Click the **Install** button after finding Quarto and VS Code should be all set.
+
+### Setting up Python virtual environment
+
+The code in the Quarto tutorial uses Python as well as specific packages.  It is best practice to set up a virtual environment and install any specific packages needed.  This allows for easier management of packages and dependencies, ensuring your code will run and not be affected by any updates outside of the isolated environment.  It also makes it easier to reproduce projects by having specific versions installed in the isolated environment.
+
+1. In your terminal, navigate to your project's root directory.  I made the mistake of setting up my virtual environment in the project directory but it has to be set up in the directory above.  This way VS Code will be able to recognize it.  Now we can complete the following steps in the terminal:
+    + `python3 -m venv .venv`: this creates the virtual environment in the directory.  `.venv` is the name of the environment and will allow VS Code to recognize it.
+    + `source .venv/bin/activate`: this command will activate the virtual environment.  You should see that the terminal prompt will have `(.venv)` in the beginning.
+2. Now we can install any specific packages we would like.  We are going to set up the [requirements.txt](https://github.com/statds/ids-f25/blob/main/requirements.txt) packages found in the class repository:
+    + `pip install -r requirements.txt`: installs all packages found in the txt file.  This txt file should be stored in the same directory as the virtual environment.
+3. Next we will select the the virtual environment in VS Code.  Press Command + Shift + P to open the Command Palette.  Here you can type in **Python: Select Interpreter**.  You should see your virtual environment as one of the options, mine come up as *Python 3.13.7 ('.venv':venv)*.
+
+### Quarto tutorial
+
+Now that we have set up our virtual environment and packages, we can go through the tutorial.
+
 
 
 
