@@ -17,6 +17,58 @@ format:
 ##  docx: Never, unless to accommodate a collaborator
 ---
 
+
+# Exercise 1
+
+## Set up SSH authentication between your computer and your GitHub account.
+
+Git is an important part of the development process.  It is a version control system that tracks any changes made to the project.  It allows a developer to comment any changes, revert the project to previous versions, and facilitate working in groups on complex projects.  The [Youtube video](https://www.youtube.com/watch?v=RGOj5yH7evk) that is listed in the [Project Management](https://statds.github.io/ids-f25/git.html) section of the class notes was a great introduction.
+
+I am working on a Mac so Git was already installed on my computer.  The instructions below are for Mac users.
+
+Setting up SSH authentication between your computer and GitHub account allows you to securely communciate with a remote repository.  I did do some steps differently than general instructions and I will note where this happened.
+
+The first step is to generate an SSH key on your computer.
+
+### Generating SSH key
+
+ 1. The first step is to open a terminal on your computer.  This is found in Applications/Utilities.  I recommened keeping the terminal in your dock for easier access later.
+ 2. Now you can run the following command to generate the SSH key:
+    + `ssh-keygen -t ed25519 -C "email@example.com"`
+      + `ssh-keygen`: this is the function to create a key.
+      + `-t ed25519`: this specifies the type of key (ed25519).
+      + `-C "email@example.com"`: adds a comment to your key to help with identification in the future.
+    + After this command, there will be few prompts:
+      + "Enter file in which to save the key": you can press Enter to save it in the default file location ~/.ssh/id_ed25519. The .ssh folder is a hidden folder where all of your SSH keys will be stored.  You can toggle hidden files and folders by pressing Command + Shift + Period in Finder.  The "id_ed25519" is the default key name.  If you generate a new key without specifying a name, you will be prompted whether or not you would like to overwrite the key.  There are instructions below on naming keys.
+      + Enter and re-enter passphrase: adds a layer of security and encrypts the key on your hardrive.
+    + Now you will see two keys in your .ssh folder: id_ed25519 (private key) and id_ed25519.pub (public key).  DO NOT SHARE PRIVATE KEY WITH ANYONE.  When using any service, always provide the .pub key.
+
+    Due to potentailly overwriting keys, perhaps needing multiple keys, or just wanting to know how to name keys, I tried to name my key and the steps were slightly different.
+
+    To generate a named key, it is similar steps except for the initial command you enter into the terminal:
+    + `test`:
+3. Test
+
+
+
+
+
+## Install Quarto onto your computer following the instructions of Get Started
+
+
+
+
+
+## Pick a tool of your choice (e.g., VS Code, Jupyter Notebook, Positron, Emacs, etc.), follow the instructions to reproduce the example of line plot on polar axis.
+
+
+
+## Render the homework into a HTML.
+
+
+
+## Print the HTML file to a pdf file and put the file into a release in your GitHub repo.
+
 # Problme 2
 
 Here is your text desctiption.
