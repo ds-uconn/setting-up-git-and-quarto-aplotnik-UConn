@@ -24,7 +24,8 @@ format:
 
 Git is an important part of the development process.  It is a version control system that tracks any changes made to the project.
 It allows a developer to comment any changes, revert the project to previous versions, and facilitate working in groups on complex projects.
-The [Youtube video](https://www.youtube.com/watch?v=RGOj5yH7evk) that is listed in the [Project Management](https://statds.github.io/ids-f25/git.html) section of the class notes was a great introduction.
+The [Youtube video](https://www.youtube.com/watch?v=RGOj5yH7evk) that is listed in the [Project Management](https://statds.github.io/ids-f25/git.html) section of the class notes 
+was a great introduction.
 
 I am working on a Mac so Git was already installed on my computer.  The instructions below are for Mac users.
 
@@ -43,8 +44,10 @@ The first step is to generate an SSH key on your computer.
       + `-C "email@example.com"`: adds a comment to your key to help with identification in the future.
     + After this command, there will be few prompts:
       + "Enter file in which to save the key": you can press Enter to save it in the default file location ~/.ssh/id_ed25519.
-      The .ssh folder is a hidden folder where all of your SSH keys will be stored.  You can toggle hidden files and folders by pressing Command + Shift + Period in Finder.  The "id_ed25519" is the default key name.
-      If at a later time, you generate another key without specifying a name, you will be prompted whether or not you would like to overwrite the key.  There are instructions below on naming keys.
+      The .ssh folder is a hidden folder where all of your SSH keys will be stored.  You can toggle hidden files and folders by pressing Command + Shift + Period in Finder.  
+      The "id_ed25519" is the default key name.
+      If at a later time, you generate another key without specifying a name, you will be prompted whether or not you would like to overwrite the key.  
+      There are instructions below on naming keys.
       + Enter and re-enter passphrase: adds a layer of security and encrypts the key on your hard drive.
     + Now you will see two keys in your .ssh folder: id_ed25519 (private key) and id_ed25519.pub (public key).  DO NOT SHARE PRIVATE KEY WITH ANYONE.
     When using any service, always provide the .pub key.
@@ -72,7 +75,9 @@ Click Sign Up on the website, this process is similar to any other account and I
 1. Now that we have set up our GitHub account, we can proceed to add our previously generated key to our account.
 We should begin by clicking our profile picture in our GitHub account and clicking **Settings** and afterwards going into **SSH and GPG Keys**.
 You will see a **New SSH key** button and we can click it now to bring us to the screen where we add our key.
-2. We will quickly hop over to our terminal and enter `cat ~/.ssh/id_ed25519.pub`.  This copies our key to the clipboard.  It should be noted that the public key is being copied, not the private key.  Also, if you named your key you will have to change "id_ed25519.pub" to your key name.
+2. We will quickly hop over to our terminal and enter `cat ~/.ssh/id_ed25519.pub`.  This copies our key to the clipboard.  
+It should be noted that the public key is being copied, not the private key.  
+Also, if you named your key you will have to change "id_ed25519.pub" to your key name.
 3. Now we can go over to the GitHub page to input our key.  You can give the key a name in the Title field and paste your public key into the Key field.
 Now your key should be added to your GitHub Account
 
@@ -92,7 +97,8 @@ There are two steps below, one for a generated key and the other if you named yo
     This message is a security warning that your computer has never connected to GitHub and needs to verify its identity.
     Some sources online say you can just type yes, but I think it would be good to verify this is the correct connection.
     You can visit [GitHub's SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints) to see their different public keys.
-    From this website, you can copy their Ed25519 key and paste it into your terminal.  If it is a match, then everything should be good.  You may be asked to enter your passphrase if you are not running an SSH Agent.
+    From this website, you can copy their Ed25519 key and paste it into your terminal.  If it is a match, then everything should be good.  
+    You may be asked to enter your passphrase if you are not running an SSH Agent.
 
 ## Install Quarto onto your computer following the instructions of Get Started
 
@@ -108,18 +114,23 @@ The code below uses VS Code.  There are a couple of steps before we can follow a
 
 ### Install VS Code Quarto extension
 
-This is another straightforward step where we can navigate to the **Extensions** tab in VS Code and search for Quarto.  Click the **Install** button after finding Quarto and VS Code should be all set.
+This is another straightforward step where we can navigate to the **Extensions** tab in VS Code and search for Quarto.  
+Click the **Install** button after finding Quarto and VS Code should be all set.
 
 ### Setting up Python virtual environment
 
-The code in the Quarto tutorial uses Python as well as specific packages.  It is best practice to set up a virtual environment and install any specific packages needed.  This allows for easier management of packages and dependencies, ensuring your code will run and not be affected by any updates outside of the isolated environment.  It also makes it easier to reproduce projects by having specific versions installed in the isolated environment.
+The code in the Quarto tutorial uses Python as well as specific packages.  It is best practice to set up a virtual environment and install any specific packages needed.  
+This allows for easier management of packages and dependencies, ensuring your code will run and not be affected by any updates outside of the isolated environment.  It also makes it easier to reproduce projects by having specific versions installed in the isolated environment.
 
-1. In your terminal, navigate to your project's root directory.  I made the mistake of setting up my virtual environment in the project directory but it has to be set up in the directory above.  This way VS Code will be able to recognize it.  Now we can complete the following steps in the terminal:
+1. In your terminal, navigate to your project's root directory.  I made the mistake of setting up my virtual environment in the project directory but it has to be set up in the directory above.  
+This way VS Code will be able to recognize it.  Now we can complete the following steps in the terminal:
     + `python3 -m venv .venv`: this creates the virtual environment in the directory.  `.venv` is the name of the environment and will allow VS Code to recognize it.
     + `source .venv/bin/activate`: this command will activate the virtual environment.  You should see that the terminal prompt will have `(.venv)` in the beginning.
-2. Now we can install any specific packages we would like.  We are going to set up the [requirements.txt](https://github.com/statds/ids-f25/blob/main/requirements.txt) packages found in the class repository:
+2. Now we can install any specific packages we would like.  
+We are going to set up the [requirements.txt](https://github.com/statds/ids-f25/blob/main/requirements.txt) packages found in the class repository:
     + `pip install -r requirements.txt`: installs all packages found in the txt file.  This txt file should be stored in the same directory as the virtual environment.
-3. Next we will select the the virtual environment in VS Code.  Press Command + Shift + P to open the Command Palette.  Here you can type in **Python: Select Interpreter**.  You should see your virtual environment as one of the options, mine came up as *Python 3.13.7 ('.venv':venv)*.
+3. Next we will select the the virtual environment in VS Code.  Press Command + Shift + P to open the Command Palette.  Here you can type in **Python: Select Interpreter**.  
+You should see your virtual environment as one of the options, mine came up as *Python 3.13.7 ('.venv':venv)*.
 
 ### Quarto tutorial
 
