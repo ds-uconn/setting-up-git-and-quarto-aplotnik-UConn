@@ -111,7 +111,7 @@ You can choose your operating system and follow the installation steps.
 ## Pick a tool of your choice (e.g., VS Code, Jupyter Notebook, Positron, Emacs, etc.), follow the instructions to reproduce the example of line plot on polar axis.
 
 After the installation, we can pick an IDE of our choice.
-The code below uses VS Code.  There are a couple of steps before we can follow along with the instructions on the [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/vscode.html) website.
+The code below uses VS Code.  There are a couple of steps before we can follow along with the instructions on [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/vscode.html).
 
 ### Install VS Code Quarto extension
 
