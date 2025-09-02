@@ -18,7 +18,7 @@ format:
 ---
 
 
-# Exercise 1
+# Exercise 01
 
 ## Set up SSH authentication between your computer and your GitHub account.
 
@@ -35,7 +35,7 @@ The first step is to generate an SSH key on your computer.
 
 ### Generating SSH key
 
- 1. The first step is to open a terminal on your computer.  This is found in Applications/Utilities.  I recommened keeping the terminal in your dock for easier access later.
+ 1. Open a terminal on your computer.  This is found in Applications/Utilities.  I recommened keeping the terminal in your dock for easier access later.
  2. Now you can run the following command to generate the SSH key:
     + `ssh-keygen -t ed25519 -C "email@example.com"`
       + `ssh-keygen`: this is the function to create a key.
@@ -51,7 +51,7 @@ The first step is to generate an SSH key on your computer.
 
     Due to potentailly overwriting keys, perhaps needing multiple keys, or just wanting to know how to name keys, I tried to name my key and the steps were slightly different.
 
-    To generate a named key, it is similar steps except for the initial command you enter into the terminal:
+    To generate a named key, the steps are similar except for the initial command you enter into the terminal:
     + `ssh-keygen -t ed25519 -f ~/.ssh/my_key_name -C "email@example.com"`:
       + `-f ~/.ssh/my_key_name`: this is the only difference from the command above.  It specifies the key name.  Enter your own key name in place of "my_key_name".
 3. Now we can add our key to an SSH Agent.  This step is optional and does not impact your ability to interact with a remote repository.
@@ -73,7 +73,7 @@ Click Sign Up on the website, this process is similar to any other account and I
 We should begin by clicking our profile picture in our GitHub account and clicking **Settings** and afterwards going into **SSH and GPG Keys**.
 You will see a **New SSH key** button and we can click it now to bring us to the screen where we add our key.
 2. We will quickly hop over to our terminal and enter `cat ~/.ssh/id_ed25519.pub`.  This copies our key to the clipboard.  It should be noted that the public key is being copied, not the private key.  Also, if you named your key you will have to change "id_ed25519.pub" to your key name.
-3. Now we can go over to the GitHub page to input our key.  You can give the key a name in the Title field and pasted your public key into the Key field.
+3. Now we can go over to the GitHub page to input our key.  You can give the key a name in the Title field and paste your public key into the Key field.
 Now your key should be added to your GitHub Account
 
 ### Verifying your SSH connection to GitHub
@@ -82,7 +82,7 @@ Now your key should be added to your GitHub Account
 There are two steps below, one for a generated key and the other if you named your key:
     + `ssh -T git@github.com`: this will test the connection between your unnamed key.
     + `ssh -i ~/.ssh/my_key_name -T git@github.com`: this is for your named key, replace "my_key_name" with your key.
-    It should be noted that the key you are using here is your private key, and do not include .pub.
+    It should be noted that the key you are using here is your private key, and does not include .pub.
 2. In examples I have seen, this usually verifies the connection and everything is good to go.  However, I received the following message:
 
     >The authenticity of host 'github.com (140.82.112.4)' can't be established.
@@ -97,14 +97,14 @@ There are two steps below, one for a generated key and the other if you named yo
 ## Install Quarto onto your computer following the instructions of Get Started
 
 This step is fairly straightforward and follows a similar installation process to other programs.
-The code in the following steps uses VSCode now we are setting up our computers to be able to use .qmd files in VSCode.
+The code in the following steps uses VS Code and now we are setting up our computers to be able to use .qmd files in VS Code.
 First, we must install Quarto on our computers, it can be found in this link: [Get Started](https://quarto.org/docs/get-started/).
-You can choose your operating system follow the installation steps.
+You can choose your operating system and follow the installation steps.
 
 ## Pick a tool of your choice (e.g., VS Code, Jupyter Notebook, Positron, Emacs, etc.), follow the instructions to reproduce the example of line plot on polar axis.
 
 After the installation, we can pick an IDE of our choice.
-The code below uses VS Code.  There are a couple of steps before we can follow along with the instructions on then [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/vscode.html) website.
+The code below uses VS Code.  There are a couple of steps before we can follow along with the instructions on the [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/vscode.html) website.
 
 ### Install VS Code Quarto extension
 
@@ -119,7 +119,7 @@ The code in the Quarto tutorial uses Python as well as specific packages.  It is
     + `source .venv/bin/activate`: this command will activate the virtual environment.  You should see that the terminal prompt will have `(.venv)` in the beginning.
 2. Now we can install any specific packages we would like.  We are going to set up the [requirements.txt](https://github.com/statds/ids-f25/blob/main/requirements.txt) packages found in the class repository:
     + `pip install -r requirements.txt`: installs all packages found in the txt file.  This txt file should be stored in the same directory as the virtual environment.
-3. Next we will select the the virtual environment in VS Code.  Press Command + Shift + P to open the Command Palette.  Here you can type in **Python: Select Interpreter**.  You should see your virtual environment as one of the options, mine come up as *Python 3.13.7 ('.venv':venv)*.
+3. Next we will select the the virtual environment in VS Code.  Press Command + Shift + P to open the Command Palette.  Here you can type in **Python: Select Interpreter**.  You should see your virtual environment as one of the options, mine came up as *Python 3.13.7 ('.venv':venv)*.
 
 ### Quarto tutorial
 
@@ -155,7 +155,7 @@ plt.show()
     > combination of code, markdown, and output is converted to plain markdown. Then, this markdown is processed by Pandoc,
     > which creates the finished format.
 
-4. Ask you to make the following small change to your code `theta = 4 * np.pi * r`.  This should results in the image below:
+4. Asks you to make the following small change to your code `theta = 4 * np.pi * r`.  This should result in the image below:
 
 For a demonstration of a line plot on a polar axis, see @fig-polar-updated.
 
@@ -191,7 +191,7 @@ There are ways to do this through VS Code but we will render our homework throug
 
 1. We must make sure our virtual environment is still active.
 
-2. Navigate through the terminal to the directory where the .qmd homework assignment is located.
+2. Navigate through the terminal to the directory where the .qmd homework file is located.
 
 3. In the terminal use `quarto render your_file.qmd` to create HTML version.
 
@@ -203,4 +203,4 @@ For this step, I initially opened the HTML in a browser and printed the PDF.  Ho
 
 2. In the directory where the HTML is located run `wkhtmltopdf input_file.html output_file.pdf`.
 
-After saving the PDF, click on **Create a new release** in the GitHub repository.  Add any titles or notes, and attach the PDF.  Click **Publish release**.
+After saving the PDF, go to GitHub and click on **Create a new release** in the GitHub repository.  Add any titles or notes, and attach the PDF.  Click **Publish release**.
