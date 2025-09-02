@@ -209,12 +209,20 @@ There are ways to do this through VS Code but we will render our homework throug
 
 3. In the terminal use `quarto render your_file.qmd` to create HTML version.
 
+4. When you open the HTML it may look like an older website instead of the preview format that is given by VS Code.
+I noticed this as I re-ran the render before upload, did not have any issues before.
+You will also notice the message: "No TeX installation was detected".
+To resolve this, you just have to run `quarto install tinytex` and render your file again.
+Due to the homework template listing PDF as a format, this will actually also create a PDF during the render.
+
 ## Print the HTML file to a pdf file and put the file into a release in your GitHub repo.
 
-For this step, I initially opened the HTML in a browser and printed the PDF.  However, I did find steps to do this through the terminal:
+For this step, I initially opened the HTML in a browser and printed the PDF.  Afterwards, I find steps to do this through the terminal:
 
 1. Install wkhtmltopdf using Homebrew: `brew install wkhtmltopdf`.
 
 2. In the directory where the HTML is located run `wkhtmltopdf input_file.html output_file.pdf`.
+
+However, after installing tinytex, the PDF is created due to the format specified in the homework template.
 
 After saving the PDF, go to GitHub and click on **Create a new release** in the GitHub repository.  Add any titles or notes, and attach the PDF.  Click **Publish release**.
