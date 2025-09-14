@@ -1,0 +1,228 @@
+---
+title: "Assignment 01"
+author: "Alex Plotnikov"
+toc: true
+number-sections: true
+highlight-style: pygments
+format: 
+  html: 
+    code-fold: true
+    html-math-method: katex
+    embed-resources: true
+    self-contained-math: true	
+  pdf: 
+    geometry: 
+      - top=30mm
+      - left=20mm
+##  docx: Never, unless to accommodate a collaborator
+---
+
+
+# Exercise 01
+
+## Set up SSH authentication between your computer and your GitHub account.
+
+Git is an important part of the development process.  It is a version control system that tracks any changes made to the project.
+It allows a developer to comment any changes, revert the project to previous versions, and facilitate working in groups on complex projects.
+The [Youtube video](https://www.youtube.com/watch?v=RGOj5yH7evk) that is listed in the [Project Management](https://statds.github.io/ids-f25/git.html) section of the class notes 
+was a great introduction.
+
+I am working on a Mac so Git was already installed on my computer.  The instructions below are for Mac users.
+
+Setting up SSH authentication between your computer and GitHub account allows you to securely communciate with a remote repository.
+I did do some steps differently than general instructions and I will note where this happened.
+
+The first step is to generate an SSH key on your computer.
+
+### Generating SSH key
+
+ 1. Open a terminal on your computer.  This is found in Applications/Utilities.  I recommened keeping the terminal in your dock for easier access later.
+ 2. Now you can run the following command to generate the SSH key:
+    + `ssh-keygen -t ed25519 -C "email@example.com"`
+      + `ssh-keygen`: this is the function to create a key.
+      + `-t ed25519`: this specifies the type of key (ed25519).
+      + `-C "email@example.com"`: adds a comment to your key to help with identification in the future.
+    + After this command, there will be few prompts:
+      + "Enter file in which to save the key": you can press Enter to save it in the default file location ~/.ssh/id_ed25519.
+      The .ssh folder is a hidden folder where all of your SSH keys will be stored.  You can toggle hidden files and folders by pressing Command + Shift + Period in Finder.  
+      The "id_ed25519" is the default key name.
+      If at a later time, you generate another key without specifying a name, you will be prompted whether or not you would like to overwrite the key.  
+      There are instructions below on naming keys.
+      + Enter and re-enter passphrase: adds a layer of security and encrypts the key on your hard drive.
+    + Now you will see two keys in your .ssh folder: id_ed25519 (private key) and id_ed25519.pub (public key).  DO NOT SHARE PRIVATE KEY WITH ANYONE.
+    When using any service, always provide the .pub key.
+
+    Due to potentailly overwriting keys, perhaps needing multiple keys, or just wanting to know how to name keys, I tried to name my key and the steps were slightly different.
+
+    To generate a named key, the steps are similar except for the initial command you enter into the terminal:
+    + `ssh-keygen -t ed25519 -f ~/.ssh/my_key_name -C "email@example.com"`:
+      + `-f ~/.ssh/my_key_name`: this is the only difference from the command above.  It specifies the key name.  Enter your own key name in place of "my_key_name".
+3. Now we can add our key to an SSH Agent.  This step is optional and does not impact your ability to interact with a remote repository.
+The SSH Agent just holds your keys in memory so you do not have to enter in your passphrase for every connection to a remote repository.  I did not use an SSH Agent.
+To add keys to SSH Agent, you have to input the following two commands into your terminal:
+    + `eval "$(ssh-agent -s)"`: this command starts the agent.  You can check if agent is already running with `ssh-add -l`.
+    If it is not running you will receive the message "Could not open a connection to your authentication agent."
+    + `ssh-add ~/.ssh/id_ed25519`: this will add your key to agent, where "id_ed25519" is the default key name.
+    If you named your key, you would have to input `ssh-add ~/.ssh/my_key_name`.
+
+### Set up GitHub account
+
+We will momentarily step away and set up our [GitHub](https://github.com/) account.
+Click Sign Up on the website, this process is similar to any other account and I do not believe warrants any steps.
+
+### Add SSH key to GitHub Account
+
+1. Now that we have set up our GitHub account, we can proceed to add our previously generated key to our account.
+We should begin by clicking our profile picture in our GitHub account and clicking **Settings** and afterwards going into **SSH and GPG Keys**.
+You will see a **New SSH key** button and we can click it now to bring us to the screen where we add our key.
+2. We will quickly hop over to our terminal and enter `cat ~/.ssh/id_ed25519.pub`.  This copies our key to the clipboard.  
+It should be noted that the public key is being copied, not the private key.  
+Also, if you named your key you will have to change "id_ed25519.pub" to your key name.
+3. Now we can go over to the GitHub page to input our key.  You can give the key a name in the Title field and paste your public key into the Key field.
+Now your key should be added to your GitHub Account
+
+### Verifying your SSH connection to GitHub
+
+1. This is the final step in setting up SSH authentication between your computer and GitHub account.
+There are two steps below, one for a generated key and the other if you named your key:
+    + `ssh -T git@github.com`: this will test the connection between your unnamed key.
+    + `ssh -i ~/.ssh/my_key_name -T git@github.com`: this is for your named key, replace "my_key_name" with your key.
+    It should be noted that the key you are using here is your private key, and does not include .pub.
+2. In examples I have seen, this usually verifies the connection and everything is good to go.  However, I received the following message:
+
+    >The authenticity of host 'github.com (140.82.112.4)' can't be established.
+    >ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zP...
+    >Are you sure you want to continue connecting (yes/no/[fingerprint])?
+
+    This message is a security warning that your computer has never connected to GitHub and needs to verify its identity.
+    Some sources online say you can just type yes, but I think it would be good to verify this is the correct connection.
+    You can visit [GitHub's SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints) 
+    to see their different public keys.
+    From this website, you can copy their Ed25519 key and paste it into your terminal.  If it is a match, then everything should be good.  
+    You may be asked to enter your passphrase if you are not running an SSH Agent.
+
+## Install Quarto onto your computer following the instructions of Get Started
+
+This step is fairly straightforward and follows a similar installation process to other programs.
+The code in the following steps uses VS Code and now we are setting up our computers to be able to use .qmd files in VS Code.
+First, we must install Quarto on our computers, it can be found in this link: [Get Started](https://quarto.org/docs/get-started/).
+You can choose your operating system and follow the installation steps.
+
+## Pick a tool of your choice (e.g., VS Code, Jupyter Notebook, Positron, Emacs, etc.), follow the instructions to reproduce the example of line plot on polar axis.
+
+After the installation, we can pick an IDE of our choice.
+The code below uses VS Code.  There are a couple of steps before we can follow along with the instructions on [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/vscode.html).
+
+### Install VS Code Quarto extension
+
+This is another straightforward step where we can navigate to the **Extensions** tab in VS Code and search for Quarto.  
+Click the **Install** button after finding Quarto and VS Code should be all set.
+
+### Setting up Python virtual environment
+
+The code in the Quarto tutorial uses Python as well as specific packages.  It is best practice to set up a virtual environment and install any specific packages needed.  
+This allows for easier management of packages and dependencies, ensuring your code will run and not be affected by any updates outside of the isolated environment.  
+It also makes it easier to reproduce projects by having specific versions installed in the isolated environment.
+
+1. In your terminal, navigate to your project's root directory.  
+I made the mistake of setting up my virtual environment in the project directory but it has to be set up in the directory above.  
+This way VS Code will be able to recognize it.  Now we can complete the following steps in the terminal:
+    + `python3 -m venv .venv`: this creates the virtual environment in the directory.  `.venv` is the name of the environment and will allow VS Code to recognize it.
+    + `source .venv/bin/activate`: this command will activate the virtual environment.  You should see that the terminal prompt will have `(.venv)` in the beginning.
+2. Now we can install any specific packages we would like.  
+We are going to set up the [requirements.txt](https://github.com/statds/ids-f25/blob/main/requirements.txt) packages found in the class repository:
+    + `pip install -r requirements.txt`: installs all packages found in the txt file.  This txt file should be stored in the same directory as the virtual environment.
+3. Next we will select the the virtual environment in VS Code.  Press Command + Shift + P to open the Command Palette.  Here you can type in **Python: Select Interpreter**.  
+You should see your virtual environment as one of the options, mine came up as *Python 3.13.7 ('.venv':venv)*.
+
+### Quarto tutorial
+
+Now that we have set up our virtual environment and packages, we can go through the tutorial.
+
+1. Copy and paste the code in the tutorial into a new hello.qmd file.  It should generate the code and image below.
+
+For a demonstration of a line plot on a polar axis, see @fig-polar.
+
+```{python}
+#| label: fig-polar
+#| fig-cap: "A line plot on a polar axis"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection': 'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+2. Next it asks to install dependencies but we should be all set in our virtual environment.
+
+3. Goes over how rendering works with a .qmd file:
+
+    > When you render a .qmd file with Quarto, the executable code blocks are processed by Jupyter, and the resulting
+    > combination of code, markdown, and output is converted to plain markdown. Then, this markdown is processed by Pandoc,
+    > which creates the finished format.
+
+4. Asks you to make the following small change to your code `theta = 4 * np.pi * r`.  This should result in the image below:
+
+For a demonstration of a line plot on a polar axis, see @fig-polar-updated.
+
+```{python}
+#| label: fig-polar-updated
+#| fig-cap: "A line plot on a polar axis"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 4 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection': 'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+5. Tutorial also shows that you do not need to generate the entire document, you can just click **Run Cell** in the .qmd file.
+
+6. YAML options allow you to either hide your code as shown above or display it.  This homework assignment has code-fold as True so my code snippets will be hidden.
+
+7. We can create headings using two ## signs.
+
+8. Finally goes over details of the code cell options as well as options to preview the document externally.
+
+## Render the homework into a HTML.
+
+There are ways to do this through VS Code but we will render our homework through the terminal.
+
+1. We must make sure our virtual environment is still active.
+
+2. Navigate through the terminal to the directory where the .qmd homework file is located.
+
+3. In the terminal use `quarto render your_file.qmd` to create HTML version.
+
+4. When you open the HTML it may look like an older website instead of the preview format that is given by VS Code.
+I noticed this as I re-ran the render before upload, did not have any issues before.
+You will also notice the message: "No TeX installation was detected".
+To resolve this, you just have to run `quarto install tinytex` and render your file again.
+Due to the homework template listing PDF as a format, this will actually also create a PDF during the render.
+
+## Print the HTML file to a pdf file and put the file into a release in your GitHub repo.
+
+For this step, I initially opened the HTML in a browser and printed the PDF.  Afterwards, I find steps to do this through the terminal:
+
+1. Install wkhtmltopdf using Homebrew: `brew install wkhtmltopdf`.
+
+2. In the directory where the HTML is located run `wkhtmltopdf input_file.html output_file.pdf`.
+
+Since the homework specifies to print the HTML created into a PDF, we must upload that PDF.
+
+After saving the PDF, go to GitHub and click on **Create a new release** in the GitHub repository.  Add any titles or notes, and attach the PDF.  Click **Publish release**.
